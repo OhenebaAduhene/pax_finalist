@@ -21,8 +21,7 @@
 <body>
 
 <div class="limiter">
-    <div class="container-login100 row">
-        <div class="col-md-4">
+    <div class="container-login100">
                 <div class="wrap-login100">
                     <form class="login100-form validate-form" action="" method="POST">
                         <span class="login100-form-title p-b-26">
@@ -70,8 +69,8 @@
                             </div>
                         </div>
                     </form>
-                </div>
-                <div class="col-md-8"> 
+                </div
+                <div> 
                     <?php require_once 'app/auth/auth_usertable.php'; ?>
                 </div>        
     </div>
