@@ -69,7 +69,7 @@
                             </div>
                         </div>
                     </form>
-                </div
+</div><br><br>
                 <div> 
                     <?php require_once 'app/auth/auth_usertable.php'; ?>
                 </div>        
