@@ -3,7 +3,7 @@
 Class Users {
 
     private $limit = 10;
-    private $counter = 1;
+    private $counter = 0;
 
     // Register users
 
