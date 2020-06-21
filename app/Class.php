@@ -75,7 +75,7 @@ Class Users {
 
         $start_from = ( $page-1 ) * $limit;
 
-        $query = "SELECT * FROM usertable ORDER BY user_id ASC LIMIT $start_from, $limit";
+        $query = "SELECT * FROM usertable ASC LIMIT $limit";
         $stmt = $pdo->query( $query );
 
         echo '
