@@ -112,11 +112,12 @@ Class Users {
 
 
 				';
-            $counter++;
+           
         }
         echo '</table>';
 
-        $this->myPagination();
+		$this->myPagination();
+		 $counter++;
     }
     // End of user table control
 
