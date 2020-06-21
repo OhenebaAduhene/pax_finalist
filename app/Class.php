@@ -78,7 +78,7 @@ Class Users{
 			<th scope="col" name="fullname">Fullname</th>
 			<th scope="col" name="index_number">Index Number</th>
 			<th scope="col" name="program">Program</th>
-			<th scope="col" name="_date">Year of Entry</th>
+			<th scope="col" name="_date">Phone</th>
 			</tr>
 			</thead>
 			';
