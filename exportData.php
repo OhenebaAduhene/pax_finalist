@@ -17,7 +17,7 @@
  
  
 
- <a href="exportData.php" class="btn btn-success pull-right" class="export">Export Data</a><br><br>
+ <a href="download_data.php" class="btn btn-success pull-right" class="export">Export Data</a><br><br>
  <?php require_once 'app/auth/auth_usertable.php'; ?>
 
   <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
