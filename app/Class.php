@@ -97,7 +97,7 @@ Class Users{
 				<td>'.$fullname.'</td>
 				<td>'.$index_number.'</td>
 				<td>'.$program.'</td>
-				<td>'.$_date.'</td>
+				<td>'.'0'.$_date.'</td>
 				</tr>
 
 				</tbody>
@@ -130,6 +130,43 @@ Class Users{
 			echo $pagLink . "</ul></nav>";
 
 		} // End of pagination
+
+
+		public function exportCSV(){
+			include "config/server.php";
+						//get records from database
+			$query = $pdo->query("SELECT * FROM usertable ORDER BY user_id DESC");
+
+			if($query){
+				$delimiter = ",";
+				$filename = "pax_finalist" . date('Y-m-d') . ".csv";
+				
+				//create a file pointer
+				$f = fopen('php://memory', 'w');
+				
+				//set column headers
+				$fields = array('ID', 'Fullname', 'Index Number', 'Program', 'Phone Number');
+				fputcsv($f, $fields, $delimiter);
+				
+				//output each row of the data, format line as csv and write to file pointer
+				while($row = $query->fetch(PDO::FETCH_ASSOC)){
+					$lineData = array($row['user_id'], $row['fullname'], $row['index_number'], $row['program'], $row['_date']);
+					fputcsv($f, $lineData, $delimiter);
+				}
+				
+				//move back to beginning of file
+				fseek($f, 0);
+				
+				//set headers to download file rather than displayed
+				header('Content-Type: text/csv');
+				header('Content-Disposition: attachment; filename="' . $filename . '";');
+				
+				//output all remaining data on a file pointer
+				fpassthru($f);
+			}
+			exit;
+
+		}
 
 		
 }

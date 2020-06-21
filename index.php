@@ -57,7 +57,7 @@
                                 <i class="zmdi zmdi-eye"></i>
                             </span>
                             <input class="input100" type="number" name="_date">
-                            <span class="focus-input100" data-placeholder="Year of entry"></span>
+                            <span class="focus-input100" data-placeholder="Contact Number"></span>
                         </div>
 
                         <div class="container-login100-form-btn">
@@ -69,8 +69,11 @@
                             </div>
                         </div>
                     </form>
-</div><br><br>
+                </div><br><br>
+                <div style="margin-left:30px"></div>
                 <div> 
+                    
+                    <a href="exportData.php" class="btn btn-success pull-right">Export Members</a><br><br>
                     <?php require_once 'app/auth/auth_usertable.php'; ?>
                 </div>        
     </div>
