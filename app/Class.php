@@ -3,7 +3,7 @@
 Class Users {
 
     private $limit = 10;
-    private $counter = 0;
+    private $counter = 1;
 
     // Register users
 
@@ -75,14 +75,13 @@ Class Users {
 
         $start_from = ( $page-1 ) * $limit;
 
-        $query = "SELECT * FROM usertable ASC LIMIT $limit";
+        $query = "SELECT * FROM usertable ORDER BY user_id ASC LIMIT $start_from, $limit";
         $stmt = $pdo->query( $query );
 
         echo '
 			<table class="table table-dark">
 			<thead class="thead-dark">
 			<tr>
-			<th scope="col" name="user_id">#</th>
 			<th scope="col" name="fullname">Fullname</th>
 			<th scope="col" name="index_number">Index Number</th>
 			<th scope="col" name="program">Program</th>
@@ -101,7 +100,6 @@ Class Users {
             echo'
 				<tbody>
 				<tr>
-				<th scope="row">'.$user_id.'</th>
 				<td>'.$fullname.'</td>
 				<td>'.$index_number.'</td>
 				<td>'.$program.'</td>
@@ -112,10 +110,10 @@ Class Users {
 
 
 				';
-            
+            $counter++;
         }
         echo '</table>';
-		$counter++;
+
         $this->myPagination();
     }
     // End of user table control
