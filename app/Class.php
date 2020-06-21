@@ -1,23 +1,24 @@
 <?php
 
-Class Users{
+Class Users {
 
     private $limit = 10;
 
     // Register users
-		public function register( $fullname, $index_number, $program, $_date ){
-			include 'config/server.php';
 
-			// checking if email already exist
-			$sql = "SELECT COUNT(index_number) AS num FROM usertable WHERE index_number = ?";
+    public function register( $fullname, $index_number, $program, $_date ) {
+        include 'config/server.php';
 
-			$stmt = $pdo->prepare($sql);
-			$stmt ->execute(array($index_number));
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			
-			if ($row['num'] > 0) {
-					# code...
-					echo "<div class='row'>
+        // checking if email already exist
+        $sql = 'SELECT COUNT(index_number) AS num FROM usertable WHERE index_number = ?';
+
+        $stmt = $pdo->prepare( $sql );
+        $stmt ->execute( array( $index_number ) );
+        $row = $stmt->fetch( PDO::FETCH_ASSOC );
+
+        if ( $row['num'] > 0 ) {
+            # code...
+            echo "<div class='row'>
 					<div class='col-md-4'></div>
 					<div class='alert alert-warning alert-dismissible fade show mb-0 col-md-4' role='alert' style='margin-top:5%, align:c'>
 					<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
@@ -27,50 +28,56 @@ Class Users{
 						Email already exist </div>
 					<div class='col-md-4'></div>
 					</div>";
-			}else{             
-				$sql = "INSERT INTO usertable(fullname, index_number, program, _date ) VALUES (?,?,?, ?)";
+        } else {
 
-				$sql_query = $pdo->prepare($sql);
-				$result = $sql_query->execute(array($fullname, $index_number, $program, $_date));
+            $sql = 'INSERT INTO usertable(fullname, index_number, program, _date ) VALUES (?,?,?, ?)';
 
-				if ($result) {
-					$stmt = $pdo->prepare("SELECT * FROM usertable WHERE index_number=?");
-					$stmt->execute([$index_number]);
-					$user = $stmt->fetch(PDO::FETCH_ASSOC);					
+            $sql_query = $pdo->prepare( $sql );
+            $result = $sql_query->execute( array( $fullname, $index_number, $program, $_date ) );
 
-					$_SESSION['user_id'] = $user['user_id'];
-					$_SESSION['fullname'] = $fullname;
-					$_SESSION['index_number'] = $index_number;	
-                    $_SESSION['program'] = $program;
-                    $_SESSION['_date'] = $_date;
-					
-					
-				} else {
-						
-				}				
-			}
-			
-        } // End of registration method
-        
+            if ( $result ) {
+                $stmt = $pdo->prepare( 'SELECT * FROM usertable WHERE index_number=?' );
+                $stmt->execute( [$index_number] );
+                $user = $stmt->fetch( PDO::FETCH_ASSOC );
 
-        // Controlling user table
-		public function user_table(){
-			include "config/server.php";
+                $_SESSION['user_id'] = $user['user_id'];
+                $_SESSION['fullname'] = $fullname;
+                $_SESSION['index_number'] = $index_number;
 
-			$limit = $this->limit;
+                $_SESSION['program'] = $program;
+                $_SESSION['_date'] = $_date;
 
-			if (isset($_GET["page"])) {
-				$page  = $_GET["page"]; 
-			} 
-			else{ 
-				$page=1;
-			};  
-			$start_from = ($page-1) * $limit;  
+            } else {
 
-			$query = "SELECT * FROM usertable ORDER BY user_id ASC LIMIT $start_from, $limit";
-			$stmt = $pdo->query($query);	
+            }
 
-			echo '
+        }
+
+    }
+    // End of registration method
+
+    // Controlling user table
+
+    public function user_table() {
+        include 'config/server.php';
+
+        $limit = $this->limit;
+
+        if ( isset( $_GET['page'] ) ) {
+            $page  = $_GET['page'];
+
+        } else {
+
+            $page = 1;
+        }
+        ;
+
+        $start_from = ( $page-1 ) * $limit;
+
+        $query = 'SELECT * FROM usertable';
+        $stmt = $pdo->query( $query );
+
+        echo '
 			<table class="table table-dark">
 			<thead class="thead-dark">
 			<tr>
@@ -83,14 +90,14 @@ Class Users{
 			</thead>
 			';
 
-			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-				$user_id = $row['user_id'];
-				$fullname = $row['fullname'];
-				$index_number = $row['index_number'];
-				$program = $row['program'];
-				$_date = $row['_date'];
-				
-				echo'
+        while( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ) {
+            $user_id = $row['user_id'];
+            $fullname = $row['fullname'];
+            $index_number = $row['index_number'];
+            $program = $row['program'];
+            $_date = $row['_date'];
+
+            echo'
 				<tbody>
 				<tr>
 				<th scope="row">'.$user_id.'</th>
@@ -104,72 +111,76 @@ Class Users{
 
 
 				';
-			}
-			echo '</table>';
+        }
+        echo '</table>';
 
-			$this->myPagination();
-        } // End of user table control
-        
+        $this->myPagination();
+    }
+    // End of user table control
 
-        // Table pagination
-		private function myPagination(){
-			include "config/server.php";
-			
-			$limit = $this->limit;
-			$query = "SELECT COUNT(*) FROM usertable ";  
-			$stmt = $pdo->query($query);
-			$total_results = $stmt->fetchColumn();						
-			$total_pages = ceil($total_results/$limit); 
+    // Table pagination
 
-			$pagLink = "<nav><ul class='pagination'>";  
+    private function myPagination() {
+        include 'config/server.php';
 
-			for ($page=1; $page<=$total_pages; $page++) {  
-				$pagLink .= "<li class='page-item'><a class = 'page-link' href='index.php?page=".$page."'>" .$page. "</a></li>";  
-			}; 
-			
-			echo $pagLink . "</ul></nav>";
+        $limit = $this->limit;
+        $query = 'SELECT COUNT(*) FROM usertable ';
 
-		} // End of pagination
+        $stmt = $pdo->query( $query );
+        $total_results = $stmt->fetchColumn();
 
+        $total_pages = ceil( $total_results/$limit );
 
-		public function exportCSV(){
-			include "config/server.php";
-						//get records from database
-			$query = $pdo->query("SELECT * FROM usertable ORDER BY user_id DESC");
+        $pagLink = "<nav><ul class='pagination'>";
 
-			if($query){
-				$delimiter = ",";
-				$filename = "pax_finalist" . date('Y-m-d') . ".csv";
-				
-				//create a file pointer
-				$f = fopen('php://memory', 'w');
-				
-				//set column headers
-				$fields = array('ID', 'Fullname', 'Index Number', 'Program', 'Phone Number');
-				fputcsv($f, $fields, $delimiter);
-				
-				//output each row of the data, format line as csv and write to file pointer
-				while($row = $query->fetch(PDO::FETCH_ASSOC)){
-					$lineData = array($row['user_id'], $row['fullname'], $row['index_number'], $row['program'], $row['_date']);
-					fputcsv($f, $lineData, $delimiter);
-				}
-				
-				//move back to beginning of file
-				fseek($f, 0);
-				
-				//set headers to download file rather than displayed
-				header('Content-Type: text/csv');
-				header('Content-Disposition: attachment; filename="' . $filename . '";');
-				
-				//output all remaining data on a file pointer
-				fpassthru($f);
-			}
-			exit;
+        for ( $page = 1; $page <= $total_pages; $page++ ) {
 
-		}
+            $pagLink .= "<li class='page-item'><a class = 'page-link' href='index.php?page=".$page."'>" .$page. '</a></li>';
 
-		
+        }
+        ;
+
+        echo $pagLink . '</ul></nav>';
+
+    }
+    // End of pagination
+
+    public function exportCSV() {
+        include 'config/server.php';
+        //get records from database
+        $query = $pdo->query( 'SELECT * FROM usertable ORDER BY user_id DESC' );
+
+        if ( $query ) {
+            $delimiter = ',';
+            $filename = 'pax_finalist' . date( 'Y-m-d' ) . '.csv';
+
+            //create a file pointer
+            $f = fopen( 'php://memory', 'w' );
+
+            //set column headers
+            $fields = array( 'ID', 'Fullname', 'Index Number', 'Program', 'Phone Number' );
+            fputcsv( $f, $fields, $delimiter );
+
+            //output each row of the data, format line as csv and write to file pointer
+            while( $row = $query->fetch( PDO::FETCH_ASSOC ) ) {
+                $lineData = array( $row['user_id'], $row['fullname'], $row['index_number'], $row['program'], $row['_date'] );
+                fputcsv( $f, $lineData, $delimiter );
+            }
+
+            //move back to beginning of file
+            fseek( $f, 0 );
+
+            //set headers to download file rather than displayed
+            header( 'Content-Type: text/csv' );
+            header( 'Content-Disposition: attachment; filename="' . $filename . '";' );
+
+            //output all remaining data on a file pointer
+            fpassthru( $f );
+        }
+        exit;
+
+    }
+
 }
-
 
 ?>
