@@ -3,6 +3,7 @@
 Class Users {
 
     private $limit = 10;
+    private $counter = 1;
 
     // Register users
 
@@ -74,7 +75,7 @@ Class Users {
 
         $start_from = ( $page-1 ) * $limit;
 
-        $query = 'SELECT * FROM usertable';
+        $query = "SELECT * FROM usertable ORDER BY user_id ASC LIMIT $start_from, $limit";
         $stmt = $pdo->query( $query );
 
         echo '
@@ -91,7 +92,7 @@ Class Users {
 			';
 
         while( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ) {
-            $user_id = $row['user_id'];
+            $user_id = $counter;
             $fullname = $row['fullname'];
             $index_number = $row['index_number'];
             $program = $row['program'];
@@ -111,6 +112,7 @@ Class Users {
 
 
 				';
+            $counter++;
         }
         echo '</table>';
 
