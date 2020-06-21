@@ -33,7 +33,7 @@
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate="Enter fullname">
-                            <input class="input100" type="text" name="fullname">
+                            <input class="input100" type="text" name="fullname"  required>
                             <span class="focus-input100" data-placeholder="Fullname"></span>
                         </div>
 
@@ -42,14 +42,14 @@
                                 <i class="zmdi zmdi-eye"></i>
                             </span>
                             <input class="input100" type="text" name="index_number">
-                            <span class="focus-input100" data-placeholder="Index Number"></span>
+                            <span class="focus-input100" data-placeholder="Index Number" required></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="Enter program">
                             <span class="btn-show-pass">
                                 <i class="zmdi zmdi-eye"></i>
                             </span>
-                            <input class="input100" type="text" name="program">
+                            <input class="input100" type="text" name="program" required>
                             <span class="focus-input100" data-placeholder="Program"></span>
                         </div>
 
@@ -57,7 +57,7 @@
                             <span class="btn-show-pass">
                                 <i class="zmdi zmdi-eye"></i>
                             </span>
-                            <input class="input100" type="number" name="_date">
+                            <input class="input100" type="number" name="_date" required>
                             <span class="focus-input100" data-placeholder="Contact Number"></span>
                         </div>
 

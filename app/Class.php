@@ -158,12 +158,12 @@ Class Users {
             $f = fopen( 'php://memory', 'w' );
 
             //set column headers
-            $fields = array( 'ID', 'Fullname', 'Index Number', 'Program', 'Phone Number' );
+            $fields = array( 'Fullname', 'Index Number', 'Program', 'Phone Number' );
             fputcsv( $f, $fields, $delimiter );
 
             //output each row of the data, format line as csv and write to file pointer
             while( $row = $query->fetch( PDO::FETCH_ASSOC ) ) {
-                $lineData = array( $row['user_id'], $row['fullname'], $row['index_number'], $row['program'], $row['_date'] );
+                $lineData = array( $row['fullname'], $row['index_number'], $row['program'], $row['_date'] );
                 fputcsv( $f, $lineData, $delimiter );
             }
 
