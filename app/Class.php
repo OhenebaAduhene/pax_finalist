@@ -3,7 +3,7 @@
 Class Users {
 
     private $limit = 10;
-    private $counter = 1;
+    // private $counter = 1;
 
     // Register users
 
@@ -91,7 +91,7 @@ Class Users {
 			';
 
         while( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ) {
-            $user_id = $counter;
+            // $user_id = $counter;
             $fullname = $row['fullname'];
             $index_number = $row['index_number'];
             $program = $row['program'];
@@ -110,7 +110,7 @@ Class Users {
 
 
 				';
-            $counter++;
+            // $counter++;
         }
         echo '</table>';
 
@@ -135,7 +135,7 @@ Class Users {
 
         for ( $page = 1; $page <= $total_pages; $page++ ) {
 
-            $pagLink .= "<li class='page-item'><a class = 'page-link' href='index.php?page=".$page."'>" .$page. '</a></li>';
+            $pagLink .= "<li class='page-item'><a class = 'page-link' href='exportData.php?page=".$page."'>" .$page. '</a></li>';
 
         }
         ;

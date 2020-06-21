@@ -74,8 +74,6 @@
                 <div style="margin-left:30px"></div>
                 <div> 
                     
-                    <a href="exportData.php" class="btn btn-success pull-right" class="export">Export Data</a><br><br>
-                    <?php require_once 'app/auth/auth_usertable.php'; ?>
                 </div>        
     </div>
 </div>
