@@ -21,6 +21,7 @@
 <body>
 
 <div class="limiter">
+
     <div class="container-login100">
                 <div class="wrap-login100">
                     <form class="login100-form validate-form" action="" method="POST">
@@ -73,7 +74,7 @@
                 <div style="margin-left:30px"></div>
                 <div> 
                     
-                    <a href="exportData.php" class="btn btn-success pull-right">Export Members</a><br><br>
+                    <a href="exportData.php" class="btn btn-success pull-right" class="export">Export Data</a><br><br>
                     <?php require_once 'app/auth/auth_usertable.php'; ?>
                 </div>        
     </div>

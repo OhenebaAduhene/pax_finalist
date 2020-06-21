@@ -1,4 +1,8 @@
-
+@media (max-width: 480px) {
+  .export {
+    display: none;
+  }
+}
 
 
 
